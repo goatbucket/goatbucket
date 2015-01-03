@@ -1,0 +1,7 @@
+<ul>
+{% for key in goat %}
+    <h2>{{ key }}</h2>
+{% empty %}
+    <li>Goat does not exist.</li>
+{% endfor %}
+</ul>

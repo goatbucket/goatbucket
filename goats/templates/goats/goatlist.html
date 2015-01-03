@@ -1,0 +1,7 @@
+<ul>
+{% for goat in goat_list %}
+    <h2>{{ goat }}</h2>
+{% empty %}
+    <li>No upcoming events for you.</li>
+{% endfor %}
+</ul>

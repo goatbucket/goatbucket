@@ -1,0 +1,16 @@
+
+newsfeed
+add hide/completed button
+
+goat list
+create url regex
+create template - display list of goats, linking to goat page
+create view - goat.objects.filter(herd__user__username).distinct
+
+goat page
+create url regex
+create template - display goat info, associated events
+create view - pass in goat, list of events
+
+
+
