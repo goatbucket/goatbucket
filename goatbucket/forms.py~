@@ -1,0 +1,14 @@
+from django import forms
+from django.contrib.auth.models import User
+from registration import registration.forms.RegistrationForm
+from goats.models import Herd, Goat
+
+class HerdRegistrationForm(RegistrationForm)
+    herd = forms.CharField(max_length=30)
+    class Meta:
+        fields = RegistrationForm.Meta.fields + ('herd')
+
+class GoatForm()
+    this is a modelform actually?
+
+bulk entry form?

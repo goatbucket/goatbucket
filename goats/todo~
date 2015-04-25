@@ -1,0 +1,28 @@
+ADD MORE COMMENTS YOU FOOL
+
+NEEDS FIXING
+
+why can I log in when already logged in?
+
+home page/index should be an informative landing page with register/log in buttons.
+if you're logged in, it should redirect you to /username, which will have the newsfeed (by default?)
+
+on event submission - goat selector should be an autocomplete text box somehow
+and date should be auto set to now
+
+TO DO
+-somehow consolidate all of the new_x views?
+-add a little notification when new_x is added
+
+
+DESIGN QUESTIONS
+can I view other users pages? do I have to be logged in to do so?
+
+if I sell goats to another user, there is a way to transfer the animal's file over to them, ether for them to print out or add to their herd on the website.
+
+birthevent and health event should be subclasses of event, no? drop down list of type: birth, health, milk record, lactation, transaction, other will change the fields of form (enter goat info, enter # of milk, enter length of lactation, etc)
+
+settings to change: average lactation length, what events are shown in feed, what info is public (?)
+
+
+
