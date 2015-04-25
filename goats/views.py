@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -22,10 +23,26 @@ def feed(request, username):
     kwargs = {}
     kwargs['feed_display'] = True
     kwargs['goat__herd__user'] = request.user.id
+=======
+from django.http import HttpResponse
+from django.template import RequestContext, loader
+
+from goats.models import Event, Goat, Herd, UserProfile
+
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the goats index.")
+    
+def feed(request, username):
+    kwargs = {}
+    kwargs['feed_display'] = True
+    kwargs['goat__herd__user__username'] = username
+>>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
     event_list = Event.objects.filter(**kwargs).order_by('-expiration').distinct()
     template = loader.get_template('goats/feed.html')
     context = RequestContext(request, {'event_list': event_list})
     return HttpResponse(template.render(context))
+<<<<<<< HEAD
 
 @login_required
 def new_goat(request):
@@ -71,4 +88,29 @@ class MyRegistrationView(RegistrationView):
         return "/view_is_decider"
 
 
+=======
+    
+def hide(request, username):
+    event = Event.objects.get(pk=request.POST['event'])
+    event.feed_display = False
+    event.save()
+    return HttpResponseRedirect(reverse('views.feed', args=(username)))
+    
+def goatlist(request, username):
+    kwargs = {}
+    kwargs['herd__user__username'] = username
+    goat_list = Goat.objects.filter(**kwargs).distinct()
+    template = loader.get_template('goats/goatlist.html')
+    context = RequestContext(request, {'goat_list': goat_list})
+    return HttpResponse(template.render(context))
+    
+def goat(request, username, goat):
+    goat = Goat.objects.get(name = goat)
+    template = loader.get_template('goats/goat.html')
+    context = RequestContext(request, {'goat': goat})
+    return HttpResponse(template.render(context))
+    
+def event(request, username):
+    return HttpResponse("event")    
+>>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
 

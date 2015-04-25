@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% block content %}
@@ -5,9 +6,22 @@
 {% for event in event_list %}
     <h2>{{ event.expiration|date:"DATE_FORMAT" }}</h2>
     <p>{{event}}</p>  
+=======
+<ul>
+{% for event in event_list %}
+    <h2>{{ event.expiration|date:"DATE_FORMAT" }}</h2>
+    <p>{{event}}</p>
+    <form action="{% url 'views.hide' event.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" id="{{event.id }}" value="Vote" />
+    </form>    
+>>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
 {% empty %}
     <li>No upcoming events for you.</li>
 {% endfor %}
 </ul>
+<<<<<<< HEAD
 {% endblock %}
+=======
+>>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
 

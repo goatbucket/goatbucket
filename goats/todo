@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ADD MORE COMMENTS YOU FOOL
 
 NEEDS FIXING
@@ -23,6 +24,18 @@ if I sell goats to another user, there is a way to transfer the animal's file ov
 birthevent and health event should be subclasses of event, no? drop down list of type: birth, health, milk record, lactation, transaction, other will change the fields of form (enter goat info, enter # of milk, enter length of lactation, etc)
 
 settings to change: average lactation length, what events are shown in feed, what info is public (?)
+=======
+
+newsfeed
+add hide/completed button
+
+goat list
+
+
+goat page
+create template - display goat info, associated events
+create view - pass in goat, list of events
+>>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
 
 
 
