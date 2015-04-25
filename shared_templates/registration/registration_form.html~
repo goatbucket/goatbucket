@@ -1,7 +1,0 @@
-{% extends 'goats/base.html' %}
-
-{% block page_name %}Register{% endblock %}
-
-{% block content %}
-
-{% endblock %}

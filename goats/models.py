@@ -1,35 +1,20 @@
 from django.db import models
-<<<<<<< HEAD
 from django.contrib.auth.models import User
-=======
-
-class UserProfile(models.Model):
-    def __str__(self):
-        return self.username
-    username = models.CharField(max_length=30)
->>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
 
 class Herd(models.Model):
     def __str__(self):
         return self.name
     name = models.CharField(max_length=30)
-<<<<<<< HEAD
     user = models.ForeignKey(User)
-=======
-    user = models.ForeignKey(UserProfile)
->>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
 
 class Goat(models.Model):
     def __str__(self):
         return self.name
     name = models.CharField(max_length=30)
     nickname = models.CharField(max_length=30, blank = True)
-<<<<<<< HEAD
     status_choices = (('A','Active'), ('D','Dead'), ('S','Sold'))
     status = models.CharField(max_length=1, choices=status_choices, null = True)
-=======
     status = models.CharField(max_length=30)
->>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
     dam = models.ForeignKey("self", related_name="mammy", null = True, blank = True)
     sire = models.ForeignKey("self", related_name="pappy", null = True, blank = True)
     sex_choices = (('F','Doe'), ('M','Buck'), ('X','Intersex'))
@@ -50,7 +35,6 @@ class GoatRegistration(models.Model):
     organization = models.CharField(max_length=30)
     #??????Awards??????
 
-#ask about class inheritance/composition for related events.
 class Event(models.Model):
     def __str__(self):
         notes = self.notes
@@ -61,17 +45,14 @@ class Event(models.Model):
         pass
     date = models.DateTimeField()
     expiration = models.DateTimeField()
-<<<<<<< HEAD
     status_choices = (('A','Active'), ('D','Dead'), ('S','Sold'))
     goat_status = models.CharField(max_length=1, choices=status_choices, null = True)
     event_choices = (
     ('B','Birth'), ('H','Health'), ('D','Death'), ('T','Purchase/Sale'),
     ('M','New Milk Record'), ('L','New Lactation'))
     event_type = models.CharField(max_length=1, choices=event_choices, null = True)
-=======
     goat_status = models.CharField(max_length=30)
     event_type = models.CharField(max_length=30)
->>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
     feed_display = models.BooleanField(default=True)
     goat = models.ManyToManyField(Goat)
     notes = models.CharField(max_length=300)
