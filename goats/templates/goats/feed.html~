@@ -1,0 +1,19 @@
+
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<ul>
+{% if alert_list %}
+    <a href="{% url 'new' url_object='event' %}">New event</a>
+    {% for alert in alert_list %}
+        <h2>{{ alert.start_time|date:"DATE_FORMAT" }}</h2>
+        <p>{{alert}}</p>  
+    {% endfor %}
+{% else %}
+    <h2>No upcoming events for you.</h2>
+    <a href="{% url 'new' url_object='alert' %}">Click to create a new alert</a>
+{% endif %}
+</ul>
+{% endblock %}
+

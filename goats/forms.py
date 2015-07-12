@@ -1,7 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
-from registration.forms import RegistrationForm
 from django.forms.extras.widgets import SelectDateWidget
+
+from registration.forms import RegistrationForm
+
+import django_filters
+
 from goats import models as m
 
 class HerdRegistrationForm(RegistrationForm):
@@ -15,16 +19,17 @@ class GoatModelForm(forms.ModelForm):
         fields = '__all__'
         widgets = {'birthday': SelectDateWidget}
 
-class EventModelForm(forms.ModelForm):
-    class Meta:
-        model = m.Event
-        fields = '__all__'
-        widgets = {'expiration': SelectDateWidget}
-
 class HerdModelForm(forms.ModelForm):
     class Meta:
         model = m.Herd
-        fields = ('name',)
+        fields = '__all__'
+        widgets = {'user': forms.HiddenInput()}
+
+
+class GoatFilter(django_filters.FilterSet):
+    class Meta:
+        model = m.Goat
+        fields = ['name']
 
 
 

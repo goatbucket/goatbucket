@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<ul>
+{% if herd_list %}
+    <a href="{% url 'new' url_object='herd' %}">Start a new herd</a>
+    {% for herd in herd_list %}
+        <p>{{herd}}</p>  
+    {% endfor %}
+{% else %}
+    <h2>You don't have any herds :(</h2>
+    <a href="{% url 'new' url_object='goat' %}">Click to start a new herd</a>
+{% endif %}
+</ul>
+{% endblock %}

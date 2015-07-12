@@ -2,6 +2,7 @@
 {% load bootstrap3 %}
 {% block title %}New {{form_title}}{% endblock %}
 {% block content %}
+{{message}}
 <form method='post'>
 {% csrf_token %}
 {{ form.as_p }}

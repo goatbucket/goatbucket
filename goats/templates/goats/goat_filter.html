@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<ul>
+{% if goat_list %}
+    <a href="{% url 'new' url_object='goat' %}">Add a new goat</a>
+    <form action="" method="get">
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
+    {% for goat in goat_list %}
+        <p>{{goat}}</p>  
+    {% endfor %}
+{% else %}
+    <h2>You don't have any goats :(</h2>
+    <a href="{% url 'new' url_object='goat' %}">Click to register a new goat</a>
+{% endif %}
+</ul>
+{% endblock %}

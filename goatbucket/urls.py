@@ -4,12 +4,12 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^/*', include('goats.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^/*', include('goats.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^password/change/$',
-            auth_views.password_change,
-            name='password_change'),
+        auth_views.password_change,
+        name='password_change'),
     url(r'^password/change/done/$',
         auth_views.password_change_done,
         name='password_change_done'),

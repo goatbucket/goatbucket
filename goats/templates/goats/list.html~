@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<ul>
+{% for goat in goat_list %}
+    <h2>{{ goat }}</h2> 
+{% empty %}
+    <h2>You don't have any goats :(</h2>
+    <li><a href="{% url 'new' url_object='event' %}">Click to register a new goat</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

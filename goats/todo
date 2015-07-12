@@ -1,41 +1,94 @@
-<<<<<<< HEAD
 ADD MORE COMMENTS YOU FOOL
 
-NEEDS FIXING
+TASKLIST
+-push to github
+-make filters that acutally filter
+-add goat to occurrence model
+-make events/occurrences work in admin
+-make adding events/occurrences work in site
+-refine feed view
 
-why can I visit login page when already logged in?
+reminders using swingtime events
+-creation using provided functions
+-premade event types health, birth, etc, which will coorespond to default pictures.
+event title: birth
+
+-feed gets a list of all events occuring that day
+-combines occurences of the same event under one header, links occurrence notes
+ex: 15 occurunces of birth event on feb 14 will condense to Feb 14, Goat and 14 others Kidding due
+click to show/hide full notes.
+
+questions
+events and pictures can link to one or more herds or goats. how the fuck? if herd is entered just attach all goats? Then view will have to watch for herds.
+
+Linked events - breeding to birth to lactation. These three events are a special something, they should be linked somehow?
+
+a more elegant way to attach events and event types.
+
+
+SITE OVERVIEW
+Goats, herds, events, are clickable and bring up the relevant detail page. Detail pages have a way for info to be edited or deleted. 
+
+Landing page: tells new users how great and easy goatbucket is and encourages them to give us money. signup/login. see: mint lander
+
+Feed page/home page: landing page when a user is logged in. displays reminders by the reminder's time. 
+    format: |pic-| 01/01/1992: Some Herd 
+            |ture| remindernotes                    O
+
+ click for  |pic-| 01/05/1992: Some Goat and 13 others 
+ detail --> |ture| remindernotes                    O  <-click this button to finish/snooze/edit/delete reminder
+
+
+similar reminders need to be grouped together in the same way, so if 15 goats are due to kid within 3 days, it shows only one reminder. 
+
+Reminders can be set without an event, like a reminder to rotate pasture, pick up meds, buy grain, deep clean the parlor...
+picture will be of relevant goat or herd, or a default picture
+
+event detail popup window - calls detail: shows event notes and options to change or delete reminders
+
+goat detail page - calls detail: displays current goat info, and all events related to that goat by events' time.
+
+goat list page - calls list: who is displayed depends on the search given. clicking on my goats shows all goats names and some basic info(age, status, sex probably). clicking on a herd will redirect user to this page with herd:herd. once they're on this page users can change the search. I imagine this to be very similar to what mint has for viewing/searching transactions.
+
+bulk data entry - calls update?: user inputs what herds/goats to edit and what fields to edit. displays something very similar to goat list page, but only the relevant fields and is a form, maybe could be the same view/template?
+
+new goat/herd/event - calls create: simple form to create new object. will suggest to create related objects and reminders - enter a new kid and it suggests a lactation event for dam, enter lactation event and it suggests a reminder when lactation is nearing end. Cases like lactation/breeding it can be a simple yes/no check box and reminder is automatically created with appropriate title and date.
+
+reports - ???: still very nebulous. Something similar to mint's trends thing, taking your data and making some basic charts for it. Tells you who your best milkers are, and the bucks that have the best daughters, stuff like that. Also an option to make up a spreadsheet and print, export, visualize?
+
+account/settings: account management and stuff.
+
+
+ 
+
+
+NEEDS FIXING
+feed is apparently not in chronological order?
 
 home page/index should be an informative landing page with register/log in buttons.
-if you're logged in, it should redirect you to /username, which will have the newsfeed (by default?)
 
 on event submission - goat selector should be an autocomplete text box somehow
 and date should be auto set to now
 
 TO DO
--somehow consolidate all of the new_x views?
--add a little notification when new_x is added
-
+-clear out database and reorganize events/reminders
+-add templates/view for list of herds, goats
+-new herd: user field is hidden, loop is executing, but form.user is not setting
 
 DESIGN QUESTIONS
 can I view other users pages? do I have to be logged in to do so?
 
-if I sell goats to another user, there is a way to transfer the animal's file over to them, ether for them to print out or add to their herd on the website.
-
 birthevent and health event should be subclasses of event, no? drop down list of type: birth, health, milk record, lactation, transaction, other will change the fields of form (enter goat info, enter # of milk, enter length of lactation, etc)
 
 settings to change: average lactation length, what events are shown in feed, what info is public (?)
-=======
 
-newsfeed
-add hide/completed button
+I put Prince Charming in with the girls October 5th. I create a new event-other. title:bred to Prince. Goat(s): Milking Crew. 
+This creates a reminder on March 2nd: Milking Crew - Kids due. I delete it from the newsfeed when kidding begins.
+This creates an entry on each doe's page: October 5th: Bred to Prince. Clicking on it, I can see the all the goats bred.
 
-goat list
+The first kid is born. I create a birth event, enter in the dam and sire and the kid's name. The next page is a form to create the kid. The event shows up on all three of the goats' pages.  
 
 
-goat page
-create template - display goat info, associated events
-create view - pass in goat, list of events
->>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
 
 
 

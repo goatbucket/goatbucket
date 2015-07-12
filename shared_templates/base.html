@@ -21,18 +21,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{% url 'goats.views.index' %}">Index</a>
+          <a class="navbar-brand" href="{% url 'index' %}">Home</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class=""><a href="{% url 'goats.views.new_herd' %}">New Herd</a></li>
-            <li class=""><a href="{% url 'goats.views.new_goat' %}">New Goat</a></li>
-            <li class=""><a href="{% url 'goats.views.new_event' %}">New Event</a></li>
+            <li class=""><a href="{% url 'herdlist' %}">My Herds</a></li>
+            <li class=""><a href="{% url 'goatlist' %}">My Goats</a></li>
           </ul>
           {% block nav_user %}
             {% if user.is_authenticated %}
               <ul class="nav navbar-nav navbar-right">
-                <li id="nav-username"><a href="{% url 'goats.views.index' %}">
+                <li id="nav-username"><a href="{% url 'index' %}">
                   <span class="glyphicon glyphicon-user"></span>  {{ user.get_username }} &nbsp; </a>
                 </li>
                 <li>

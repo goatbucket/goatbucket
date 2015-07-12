@@ -43,6 +43,9 @@ INSTALLED_APPS = (
     'goats',
     'registration',
     'bootstrap3',
+    'swingtime',
+    'simple_history',
+    'django_filters',
 )
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.

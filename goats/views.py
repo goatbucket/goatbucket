@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -7,110 +6,65 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext, loader
 
-from goats.models import Event, Goat, Herd
+import string
+
+from swingtime import models as swingtime
+from models import *
 from goats import forms as f
 
-from registration.backends.simple.views import RegistrationView
+from datetime import *
+from swingtime import models as swingtime
 
-
+#returns landing/login page or redirect
 def index(request):
     if request.user.is_authenticated():
             return HttpResponseRedirect(reverse(feed, args=[request.user.username]))
     return HttpResponseRedirect('accounts/login')
 
+#newsfeed page, would be great if I could fit with object list
 @login_required
 def feed(request, username):
-    kwargs = {}
-    kwargs['feed_display'] = True
-    kwargs['goat__herd__user'] = request.user.id
-=======
-from django.http import HttpResponse
-from django.template import RequestContext, loader
-
-from goats.models import Event, Goat, Herd, UserProfile
-
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the goats index.")
-    
-def feed(request, username):
-    kwargs = {}
-    kwargs['feed_display'] = True
-    kwargs['goat__herd__user__username'] = username
->>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
-    event_list = Event.objects.filter(**kwargs).order_by('-expiration').distinct()
-    template = loader.get_template('goats/feed.html')
-    context = RequestContext(request, {'event_list': event_list})
-    return HttpResponse(template.render(context))
-<<<<<<< HEAD
+    if request.user.username == username:
+        kwargs = {}
+        kwargs['goat__herd__user'] = request.user.id
+        alert_list = swingtime.Occurrence.objects.filter(**kwargs).order_by('start_time')
+        #group similar events with OccurrenceManager.dailyoccurrences()
+        template = loader.get_template('goats/feed.html')
+        context = RequestContext(request, {'alert_list': alert_list})
+        return HttpResponse(template.render(context))
+    return HttpResponse("these aren't your goats!")#really should be an 404 page
 
 @login_required
-def new_goat(request):
-    form_title = 'Goat'
-    if request.method == 'POST':
-        form = f.GoatModelForm(request.POST)
-        if form.is_valid():
-            new_goat = form.save()
-            return HttpResponseRedirect("/")
-        return render(request, 'goats/submission_form.html', {'form': form, 'form_title': form_title})
-    form = f.GoatModelForm()
-    return render(request, 'goats/submission_form.html',{'form': form, 'form_title': form_title}) 
-
-@login_required
-def new_herd(request):
-    form_title = 'Herd'
-    if request.method == 'POST':
-        form = f.HerdModelForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            user = request.user
-            herd = Herd.objects.create(name=name, user=user)
-            return HttpResponseRedirect("/goats/new")
-        return render(request, 'goats/submission_form.html', {'form': form, 'form_title': form_title})
-    form = f.HerdModelForm()
-    return render(request, 'goats/submission_form.html',{'form': form, 'form_title': form_title}) 
-
-@login_required
-def new_event(request):
-    form_title = 'Event'
-    if request.method == 'POST':
-        form = f.EventModelForm(request.POST)
-        if form.is_valid():
-            new_event = form.save()
-            return HttpResponseRedirect("/")
-        return render(request, 'goats/submission_form.html', {'form': form, 'form_title': form_title})
-    form = f.EventModelForm()
-    return render(request, 'goats/submission_form.html',{'form': form, 'form_title': form_title})
-
-
-class MyRegistrationView(RegistrationView):
-    def success_url(self, request, user):
-        return "/view_is_decider"
-
-
-=======
-    
-def hide(request, username):
-    event = Event.objects.get(pk=request.POST['event'])
-    event.feed_display = False
-    event.save()
-    return HttpResponseRedirect(reverse('views.feed', args=(username)))
-    
-def goatlist(request, username):
+def goatlist(request):
     kwargs = {}
-    kwargs['herd__user__username'] = username
-    goat_list = Goat.objects.filter(**kwargs).distinct()
-    template = loader.get_template('goats/goatlist.html')
+    kwargs['herd__user'] = request.user.id
+    goat_list = f.GoatFilter(request.GET, queryset=Goat.objects.filter(**kwargs))
+    template = loader.get_template('goats/goat_filter.html')
     context = RequestContext(request, {'goat_list': goat_list})
     return HttpResponse(template.render(context))
-    
-def goat(request, username, goat):
-    goat = Goat.objects.get(name = goat)
-    template = loader.get_template('goats/goat.html')
-    context = RequestContext(request, {'goat': goat})
-    return HttpResponse(template.render(context))
-    
-def event(request, username):
-    return HttpResponse("event")    
->>>>>>> f6121c5250e855357ba8fe21066572889d22ddbd
+
+@login_required
+def detail(request, name):
+    return HttpResponse("you're looking at a goat")
+
+
+#creates a new instance of an object
+@login_required
+def new(request, user, url_object):
+    form_title = string.capitalize(url_object)
+    form = eval('f.' + form_title + 'ModelForm()')
+    if request.method == 'POST':
+        form = eval('f.' + form_title + 'ModelForm(request.POST)')
+        if form.user:
+            form.user = user
+        if form.is_valid():
+            new_object = form.cleaned_data.save()
+            return render(request, 'goats/submission_form.html', 
+                {'form': form, 'form_title': form_title, 'message': 'success!'})
+        return render(request, 'goats/submission_form.html', 
+            {'form': form, 'form_title': form_title, 'message': 'there was an error!'})
+    return render(request, 'goats/submission_form.html',
+        {'form': form, 'form_title': form_title})
+
+#updates an instance of an object
 

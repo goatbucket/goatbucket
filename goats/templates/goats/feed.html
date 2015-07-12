@@ -4,12 +4,16 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 <ul>
-{% for event in event_list %}
-    <h2>{{ event.expiration|date:"DATE_FORMAT" }}</h2>
-    <p>{{event}}</p>  
-{% empty %}
-    <li>No upcoming events for you.</li>
-{% endfor %}
+{% if alert_list %}
+    <a href="{% url 'new' url_object='alert' %}">New alert</a>
+    {% for alert in alert_list %}
+        <h2>{{ alert.start_time|date:"DATE_FORMAT" }}</h2>
+        <p>{{alert}}</p>  
+    {% endfor %}
+{% else %}
+    <h2>No upcoming events for you.</h2>
+    <a href="{% url 'new' url_object='alert' %}">Click to create a new alert</a>
+{% endif %}
 </ul>
 {% endblock %}
 
